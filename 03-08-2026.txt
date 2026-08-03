@@ -1,0 +1,161 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Aug 3 08:15:20 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A190@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> create table student(
+  2  Regno char(10) Primary Key,
+  3  Name varchar2(30),
+  4  DOB date,
+  5  Course char(10)
+  6  );
+
+Table created.
+
+SQL> desc student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                     NOT NULL CHAR(10)
+ NAME                                               VARCHAR2(30)
+ DOB                                                DATE
+ COURSE                                             CHAR(10)
+
+SQL> create table marks(
+  2  Regno char(10),
+  3  total_marks number(3),
+  4  foreign key(regno) references student(regno)
+  5  );
+
+Table created.
+
+SQL> desc marks;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              CHAR(10)
+ TOTAL_MARKS                                        NUMBER(3)
+
+SQL> insert into student values('11249A190','avya','06-feb-07','BE');
+
+1 row created.
+
+SQL> insert into student values('11249A111','siri','09-mar-06','BE');
+
+1 row created.
+
+SQL> insert into marks values('11249A190',96);
+
+1 row created.
+
+SQL> insert into marks values('11249A111',97);
+
+1 row created.
+
+SQL> select * from student
+  2  ;
+
+REGNO      NAME                           DOB       COURSE
+---------- ------------------------------ --------- ----------
+11249A190  avya                           06-FEB-07 BE
+11249A111  siri                           09-MAR-06 BE
+
+SQL> select * from marks;
+
+REGNO      TOTAL_MARKS
+---------- -----------
+11249A190           96
+11249A111           97
+
+SQL> desc marks;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                              CHAR(10)
+ TOTAL_MARKS                                        NUMBER(3)
+
+SQL> create table department(
+  2  deptno number(3) primary key,
+  3  deptname varchar(20) not null
+  4  );
+
+Table created.
+SQL> create table student1(
+  2   regno char(10) primary key,
+  3   name varchar2(40) not null,
+  4  gender char default 'M',
+  5   age number check(age<100),
+  6   email varchar2(15) unique,
+  7   deptno number(5) references department(deptno)
+  8  );
+
+Table created.
+SQL> insert into department values(11,'CSE');
+
+1 row created.
+
+SQL> insert into student1(regno,name,age,email,deptno) values('11249A10','avya',19,'avya@gmail.com',11);
+
+1 row created.
+
+SQL> select * from department;
+
+    DEPTNO DEPTNAME
+---------- --------------------
+        11 CSE
+
+SQL> select * from student1;
+
+REGNO      NAME                                     G        AGE EMAIL
+---------- ---------------------------------------- - ---------- ---------------
+    DEPTNO
+----------
+11249A10   avya                                     M         19 avya@gmail.com
+        11
+
+
+SQL>SQL> desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                     NOT NULL CHAR(10)
+ NAME                                      NOT NULL VARCHAR2(40)
+ GENDER                                             CHAR(1)
+ AGE                                                NUMBER
+ EMAIL                                              VARCHAR2(15)
+ DEPTNO                                             NUMBER(5)
+
+SQL> desc department;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPTNO                                    NOT NULL NUMBER(3)
+ DEPTNAME                                  NOT NULL VARCHAR2(20)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
