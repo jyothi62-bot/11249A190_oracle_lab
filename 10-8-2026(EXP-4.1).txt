@@ -1,0 +1,80 @@
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Aug 10 00:43:17 2026
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: A190@db2021
+Enter password:
+
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+STUDENT7                       TABLE
+STUDENT6                       TABLE
+STUDENT5                       TABLE
+STUDENT4                       TABLE
+STUDENT3                       TABLE
+STUDENT2                       TABLE
+STUDENT11                      TABLE
+STUDENT1                       TABLE
+DEPT                           TABLE
+
+9 rows selected.
+
+SQL> create table student8(
+  2  regno number(5),
+  3  name varchar2(20),
+  4  email varchar2(20),
+  5  age number(3),
+  6  gender char,
+  7  deptno number(2)
+  8  );
+
+Table created.
+
+SQL> alter table student8 add constraint stu_pk  primary key(regno);
+
+Table altered.
+
+SQL> alter table student8 add constraint stu_fk foreign key(deptno) references dept(deptno);
+
+Table altered.
+
+SQL> desc student8;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                     NOT NULL NUMBER(5)
+ NAME                                               VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ AGE                                                NUMBER(3)
+ GENDER                                             CHAR(1)
+ DEPTNO                                             NUMBER(2)
+
+SQL> alter table student8 add constraint stu_un unique(email);
+
+Table altered.
+
+SQL> alter table student8 add constraint stu_chk check(age>=18);
+
+Table altered.
+
+SQL> alter table student8 modify gender default('F');
+
+Table altered.
+
+SQL> alter table student8 modify name constraint stu_ntnull not null;
+
+Table altered.
+
+SQL> desc student8;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNO                                     NOT NULL NUMBER(5)
+ NAME                                      NOT NULL VARCHAR2(20)
+ EMAIL                                              VARCHAR2(20)
+ AGE                                                NUMBER(3)
+ GENDER                                             CHAR(1)
+ DEPTNO                                             NUMBER(2)

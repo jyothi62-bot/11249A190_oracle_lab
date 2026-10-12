@@ -1,0 +1,225 @@
+Enter user-name: A190@db2021
+Enter password:
+Connected to:
+Oracle Database 11g Release 11.2.0.1.0 - Production
+
+SQL> create table student
+  2  (
+  3  regnumber varchar2(10),
+  4  name varchar2(40),
+  5  dob date,
+  6  coursename char(2),
+  7  year number,
+  8  dept char(5)
+  9  );
+
+Table created.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNUMBER                                          VARCHAR2(10)
+ NAME                                               VARCHAR2(40)
+ DOB                                                DATE
+ COURSENAME                                         CHAR(2)
+ YEAR                                               NUMBER
+ DEPT                                               CHAR(5)
+SQL> create table student1 as select *from student;
+
+Table created.
+
+SQL> Desc student1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNUMBER                                          VARCHAR2(10)
+ NAME                                               VARCHAR2(40)
+ DOB                                                DATE
+ COURSENAME                                         CHAR(2)
+ YEAR                                               NUMBER
+ DEPT                                               CHAR(5)
+
+SQL> select *from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+STUDENT1                       TABLE
+STUDENT                        TABLE
+
+
+SQL> create table stu1 as select regnumber,name,dob,year from student;
+
+Table created.
+
+SQL> desc student
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNUMBER                                          VARCHAR2(10)
+ NAME                                               VARCHAR2(40)
+ DOB                                                DATE
+ COURSENAME                                         CHAR(2)
+ YEAR                                               NUMBER
+ DEPT                                               CHAR(5)
+
+SQL> desc stu1
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNUMBER                                          VARCHAR2(10)
+ NAME                                               VARCHAR2(40)
+ DOB                                                DATE
+ YEAR                                               NUMBER
+
+SQL> drop table stu1
+  2  drop table stu1;
+drop table stu1
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> drop table stu1;
+
+Table dropped.
+SQL> insert into student values('11249A190','avya','06-feb-07','BE',3,'cse');
+
+1 row created.
+
+SQL> desc student;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ REGNUMBER                                          VARCHAR2(10)
+ NAME                                               VARCHAR2(40)
+ DOB                                                DATE
+ COURSENAME                                         CHAR(2)
+ YEAR                                               NUMBER
+ DEPT                                               CHAR(5)
+
+SQL> select *from student;
+
+REGNUMBER  NAME                                     DOB       CO       YEAR
+---------- ---------------------------------------- --------- -- ----------
+DEPT
+-----
+11249A190  avya                                     06-FEB-07 BE          3
+cse
+SQL> alter table student modify name varchar2(25);
+
+Table altered.
+
+SQL> select *from  student;
+
+REGNUMBER  NAME                      DOB       CO       YEAR DEPT
+---------- ------------------------- --------- -- ---------- -----
+11249A190  avya                      06-FEB-07 BE          3 cse
+
+SQL> alter table student modify coursename char(10);
+
+Table altered.
+
+SQL> select *from  student;
+
+REGNUMBER  NAME                      DOB       COURSENAME       YEAR DEPT
+---------- ------------------------- --------- ---------- ---------- -----
+11249A190  avya                      06-FEB-07 BE                  3 cse
+
+SQL> create table stu2 as select regnumber,name,dob,year from student;
+
+Table created.
+SQL> select * from student;
+
+REGNUMBER  NAME                      DOB       COURSENAME       YEAR DEPT
+---------- ------------------------- --------- ---------- ---------- -----
+11249A190  avya                      06-FEB-07 BE                  3 cse
+
+SQL> select * from stu2;
+
+REGNUMBER  NAME                      DOB             YEAR
+---------- ------------------------- --------- ----------
+11249A190  avya                      06-FEB-07          3
+
+SQL> create table stu3 as select*from student;
+
+Table created.
+
+SQL> select * from stu3;
+
+REGNUMBER  NAME                      DOB       COURSENAME       YEAR DEPT
+---------- ------------------------- --------- ---------- ---------- -----
+11249A190  avya                      06-FEB-07 BE                  3 cse
+
+SQL> create table stu4 as select *from student where 1>2;
+
+Table created.
+
+SQL> select *from stu4;
+
+no rows selected
+
+SQL> insert into student(regnumber,name,coursename,year)values('11249A181','siri','BA',3);
+
+1 row created.
+
+SQL> select *from student;
+
+REGNUMBER  NAME                      DOB       COURSENAME       YEAR DEPT
+---------- ------------------------- --------- ---------- ---------- -----
+11249A190  avya                      06-FEB-07 BE                  3 cse
+11249A181  siri                                BA                  3
+
+SQL> rename stu4 to stu1;
+
+Table renamed.
+
+SQL> insert into student values('&regnumber','&name','&dob','&coursename',&year,'&dept');
+Enter value for regnumber: 11249A199
+Enter value for name: kian
+Enter value for dob: 09-jan-09
+Enter value for coursename: BBA
+Enter value for year: 1
+Enter value for dept: arts
+old   1: insert into student values('&regnumber','&name','&dob','&coursename',&year,'&dept')
+new   1: insert into student values('11249A199','kian','09-jan-09','BBA',1,'arts')
+
+1 row created.
+
+SQL> /
+Enter value for regnumber: 11249a192
+Enter value for name: siya
+Enter value for dob: 19-mar-08
+Enter value for coursename: BE
+Enter value for year: 2
+Enter value for dept: cse
+old   1: insert into student values('&regnumber','&name','&dob','&coursename',&year,'&dept')
+new   1: insert into student values('11249a192','siya','19-mar-08','BE',2,'cse')
+
+1 row created.
+
+SQL> /
+Enter value for regnumber: 11249a166
+Enter value for name: anu
+Enter value for dob: 11-apr-08
+Enter value for coursename: BBA
+Enter value for year: 2
+Enter value for dept: ece
+old   1: insert into student values('&regnumber','&name','&dob','&coursename',&year,'&dept')
+new   1: insert into student values('11249a166','anu','11-apr-08','BBA',2,'ece')
+
+1 row created.
+
+SQL> select *from student
+  2  ;
+
+REGNUMBER  NAME                      DOB       COURSENAME       YEAR DEPT
+---------- ------------------------- --------- ---------- ---------- -----
+11249A190  avya                      06-FEB-07 BE                  3 cse
+11249A181  siri                                BA                  3
+11249A199  kian                      09-JAN-09 BBA                 1 arts
+11249a192  siya                      19-MAR-08 BE                  2 cse
+11249a166  anu                       11-APR-08 BBA                 2 ece
+
+
+
+
+
+
+
+
